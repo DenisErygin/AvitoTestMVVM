@@ -24,10 +24,13 @@ final class ProductCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private func
+    
     private func setupLayout() {
         translatesAutoresizingMaskIntoConstraints = false
         collectionLayout.minimumLineSpacing = 5
         collectionLayout.scrollDirection = .vertical
+        self.showsVerticalScrollIndicator = false
     }
     
     private func setDelegates() {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Advertisements: Codable {
+struct AdvertisementResponse: Codable {
     let advertisements: [Advertisement]
 }
 
