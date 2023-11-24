@@ -9,15 +9,23 @@ import UIKit
 
 final class ProductCollectionView: UICollectionView {
     
+    // MARK: - Private properties
+
     private let collectionLayout = UICollectionViewFlowLayout()
+    
+    private let viewModel = MainViewModel()
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: collectionLayout)
         
+        register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.idCell)
+        
         setupLayout()
         setDelegates()
-        
-        register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.idCell)
+        bindViewModel()
+        viewModel.fetchAdvertisments()
     }
     
     required init?(coder: NSCoder) {
@@ -28,7 +36,7 @@ final class ProductCollectionView: UICollectionView {
     
     private func setupLayout() {
         translatesAutoresizingMaskIntoConstraints = false
-        collectionLayout.minimumLineSpacing = 5
+        collectionLayout.minimumLineSpacing = 10
         collectionLayout.scrollDirection = .vertical
         self.showsVerticalScrollIndicator = false
     }
@@ -37,6 +45,14 @@ final class ProductCollectionView: UICollectionView {
         dataSource = self
         delegate = self
     }
+    
+    private func bindViewModel() {
+        viewModel.advertismentsData.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -44,11 +60,17 @@ final class ProductCollectionView: UICollectionView {
 extension ProductCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        
+        viewModel.numberOfItems()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.idCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
+        
+        let advertisment = viewModel.advertismentsData.value.advertisements
+        cell.configureProductCell(item: advertisment[indexPath.item])
+        
+//        print(advertisment)
  
         return cell
     }
@@ -58,6 +80,6 @@ extension ProductCollectionView: UICollectionViewDataSource {
 
 extension ProductCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 170, height: 200)
+        CGSize(width: 170, height: 270)
     }
 }

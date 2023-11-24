@@ -10,12 +10,18 @@ import UIKit
 final class MainViewController: UIViewController {
     
     private let productCollectionView = ProductCollectionView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         setConstrains()
+        
+        print("MainViewController download")
+    }
+    
+    deinit {
+        print("MainViewController deinit")
     }
 }
 
@@ -37,4 +43,3 @@ private extension MainViewController {
         ])
     }
 }
-

@@ -10,19 +10,22 @@ import UIKit
 final class ProductCell: UICollectionViewCell {
     
     static let idCell = "ProductCell"
+    private let imageService = ImageService()
     
     // MARK: - Private properties
     
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
+        //        imageView.backgroundColor = .green
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -42,7 +45,6 @@ final class ProductCell: UICollectionViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .gray
         return label
     }()
     
@@ -58,6 +60,23 @@ final class ProductCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Configure Cell
+    
+    func configureProductCell(item: Advertisement) {
+        //        print("Image URL: \(item.imageUrl)")
+        
+        if let imageUrl = URL(string: item.imageUrl) {
+            imageService.loadImage(from: imageUrl) { [weak self] image in
+                self?.imageView.image = image
+            }
+        }
+        
+        titleLabel.text = item.title
+        priceLabel.text = item.price
+        locationLabel.text = item.location
+        dateLabel.text = item.createdAt
+    }
 }
 
 // MARK: - UI
@@ -65,8 +84,8 @@ final class ProductCell: UICollectionViewCell {
 private extension ProductCell {
     
     func setupView() {
-        backgroundColor = .gray
-        layer.cornerRadius = 30
+        backgroundColor = .systemBlue
+        layer.cornerRadius = 20
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -95,18 +114,20 @@ private extension ProductCell {
             imageView.heightAnchor.constraint(equalToConstant: 150),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             locationLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 5),
-            locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            locationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
 }
