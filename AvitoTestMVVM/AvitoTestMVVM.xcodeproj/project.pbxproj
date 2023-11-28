@@ -12,6 +12,7 @@
 		920B184D2B0DEC22003A558A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B184C2B0DEC22003A558A /* MainViewController.swift */; };
 		920B18522B0DEC23003A558A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920B18512B0DEC23003A558A /* Assets.xcassets */; };
 		920B18552B0DEC23003A558A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920B18532B0DEC23003A558A /* LaunchScreen.storyboard */; };
+		9233C12B2B161AC1007C227A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9233C12A2B161AC1007C227A /* Kingfisher */; };
 		92EF39912B0E0552005C57E3 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39902B0E0552005C57E3 /* Advertisement.swift */; };
 		92EF39932B0E05E7005C57E3 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39922B0E05E7005C57E3 /* Details.swift */; };
 		92EF39962B0E06E8005C57E3 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39952B0E06E8005C57E3 /* Dynamic.swift */; };
@@ -20,7 +21,6 @@
 		92EF399E2B0F20AB005C57E3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF399D2B0F20AB005C57E3 /* MainViewModel.swift */; };
 		92EF39A12B0F77BC005C57E3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39A02B0F77BC005C57E3 /* NetworkService.swift */; };
 		92EF39A32B0F7984005C57E3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39A22B0F7984005C57E3 /* API.swift */; };
-		92EF39A52B10C823005C57E3 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39A42B10C823005C57E3 /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		92EF399D2B0F20AB005C57E3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		92EF39A02B0F77BC005C57E3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		92EF39A22B0F7984005C57E3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		92EF39A42B10C823005C57E3 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9233C12B2B161AC1007C227A /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				92EF39A02B0F77BC005C57E3 /* NetworkService.swift */,
-				92EF39A42B10C823005C57E3 /* ImageService.swift */,
 				92EF39A22B0F7984005C57E3 /* API.swift */,
 			);
 			path = Network;
@@ -179,6 +178,9 @@
 			dependencies = (
 			);
 			name = AvitoTestMVVM;
+			packageProductDependencies = (
+				9233C12A2B161AC1007C227A /* Kingfisher */,
+			);
 			productName = AvitoTestMVVM;
 			productReference = 920B18452B0DEC22003A558A /* AvitoTestMVVM.app */;
 			productType = "com.apple.product-type.application";
@@ -207,6 +209,9 @@
 				Base,
 			);
 			mainGroup = 920B183C2B0DEC22003A558A;
+			packageReferences = (
+				9233C1292B161AC1007C227A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 920B18462B0DEC22003A558A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -238,7 +243,6 @@
 				920B184D2B0DEC22003A558A /* MainViewController.swift in Sources */,
 				92EF39932B0E05E7005C57E3 /* Details.swift in Sources */,
 				92EF39912B0E0552005C57E3 /* Advertisement.swift in Sources */,
-				92EF39A52B10C823005C57E3 /* ImageService.swift in Sources */,
 				92EF39962B0E06E8005C57E3 /* Dynamic.swift in Sources */,
 				92EF39992B0E19B3005C57E3 /* ProductCollectionView.swift in Sources */,
 				92EF399C2B0E1BD9005C57E3 /* ProductCell.swift in Sources */,
@@ -455,6 +459,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9233C1292B161AC1007C227A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9233C12A2B161AC1007C227A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9233C1292B161AC1007C227A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 920B183D2B0DEC22003A558A /* Project object */;
 }

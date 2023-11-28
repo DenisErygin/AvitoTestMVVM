@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProductCollectionView: UICollectionView {
     
@@ -67,11 +68,11 @@ extension ProductCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.idCell, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
         
-        let advertisment = viewModel.advertismentsData.value.advertisements
-        cell.configureProductCell(item: advertisment[indexPath.item])
+        let advertisment = viewModel.advertismentsData.value.advertisements[indexPath.item]
+        let url = URL(string: advertisment.imageUrl)
+        cell.imageView.kf.setImage(with: url)
+        cell.configureProductCell(item: advertisment)
         
-//        print(advertisment)
- 
         return cell
     }
 }

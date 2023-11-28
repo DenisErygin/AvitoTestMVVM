@@ -10,9 +10,13 @@ import UIKit
 final class ProductCell: UICollectionViewCell {
     
     static let idCell = "ProductCell"
-    private let imageService = ImageService()
-    
+//
     // MARK: - Private properties
+    
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        return activityIndicator
+    }()
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -64,18 +68,25 @@ final class ProductCell: UICollectionViewCell {
     // MARK: - Configure Cell
     
     func configureProductCell(item: Advertisement) {
-        //        print("Image URL: \(item.imageUrl)")
-        
-        if let imageUrl = URL(string: item.imageUrl) {
-            imageService.loadImage(from: imageUrl) { [weak self] image in
-                self?.imageView.image = image
-            }
-        }
-        
+ 
         titleLabel.text = item.title
         priceLabel.text = item.price
         locationLabel.text = item.location
-        dateLabel.text = item.createdAt
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let date = inputFormatter.date(from: item.createdAt) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.locale = Locale(identifier: "ru_RU")
+            outputFormatter.dateFormat = "d MMMM, yyyy"
+            
+            let formattedDate = outputFormatter.string(from: date)
+            dateLabel.text = formattedDate
+        } else {
+            print("Ошибка преобразования строки даты в объект Date. Неверный формат строки: \(item.createdAt)")
+            dateLabel.text = "Неверный формат даты"
+        }
     }
 }
 
@@ -84,15 +95,17 @@ final class ProductCell: UICollectionViewCell {
 private extension ProductCell {
     
     func setupView() {
-        backgroundColor = .systemBlue
+        //        backgroundColor = .systemBlue
         layer.cornerRadius = 20
         
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        addSubview(loadingIndicator)
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(priceLabel)
@@ -112,6 +125,9 @@ private extension ProductCell {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 150),
+            
+            loadingIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            loadingIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
