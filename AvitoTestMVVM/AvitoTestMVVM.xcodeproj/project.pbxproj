@@ -13,6 +13,9 @@
 		920B18522B0DEC23003A558A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920B18512B0DEC23003A558A /* Assets.xcassets */; };
 		920B18552B0DEC23003A558A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920B18532B0DEC23003A558A /* LaunchScreen.storyboard */; };
 		9233C12B2B161AC1007C227A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9233C12A2B161AC1007C227A /* Kingfisher */; };
+		9233C12D2B171F27007C227A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C12C2B171F27007C227A /* DetailViewModel.swift */; };
+		9233C12F2B171FA2007C227A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C12E2B171FA2007C227A /* DetailViewController.swift */; };
+		9233C1332B174A4B007C227A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9233C1322B174A4B007C227A /* DetailView.swift */; };
 		92EF39912B0E0552005C57E3 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39902B0E0552005C57E3 /* Advertisement.swift */; };
 		92EF39932B0E05E7005C57E3 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39922B0E05E7005C57E3 /* Details.swift */; };
 		92EF39962B0E06E8005C57E3 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EF39952B0E06E8005C57E3 /* Dynamic.swift */; };
@@ -31,6 +34,9 @@
 		920B18512B0DEC23003A558A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		920B18542B0DEC23003A558A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		920B18562B0DEC23003A558A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9233C12C2B171F27007C227A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		9233C12E2B171FA2007C227A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9233C1322B174A4B007C227A /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		92EF39902B0E0552005C57E3 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
 		92EF39922B0E05E7005C57E3 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		92EF39952B0E06E8005C57E3 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
@@ -73,10 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				920B185C2B0DEC34003A558A /* Application */,
+				92EF399F2B0F778C005C57E3 /* Network */,
 				920B185D2B0DEC40003A558A /* Models */,
 				920B185E2B0DEC45003A558A /* Views */,
 				920B185F2B0DEC4A003A558A /* ViewModels */,
-				92EF399F2B0F778C005C57E3 /* Network */,
 				920B18602B0DEC54003A558A /* SupportingFiles */,
 			);
 			path = AvitoTestMVVM;
@@ -103,9 +109,9 @@
 		920B185E2B0DEC45003A558A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9233C1322B174A4B007C227A /* DetailView.swift */,
+				9233C1312B174A24007C227A /* ProductCollectionView */,
 				92EF39972B0E073C005C57E3 /* Controllers */,
-				92EF39982B0E19B3005C57E3 /* ProductCollectionView.swift */,
-				92EF399A2B0E19B7005C57E3 /* Cell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +121,7 @@
 			children = (
 				92EF39942B0E06B5005C57E3 /* Bindings */,
 				92EF399D2B0F20AB005C57E3 /* MainViewModel.swift */,
+				9233C12C2B171F27007C227A /* DetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -129,6 +136,15 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		9233C1312B174A24007C227A /* ProductCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				92EF39982B0E19B3005C57E3 /* ProductCollectionView.swift */,
+				92EF399A2B0E19B7005C57E3 /* Cell */,
+			);
+			path = ProductCollectionView;
+			sourceTree = "<group>";
+		};
 		92EF39942B0E06B5005C57E3 /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				920B184C2B0DEC22003A558A /* MainViewController.swift */,
+				9233C12E2B171FA2007C227A /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,13 +255,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9233C12F2B171FA2007C227A /* DetailViewController.swift in Sources */,
 				92EF39A32B0F7984005C57E3 /* API.swift in Sources */,
 				92EF39A12B0F77BC005C57E3 /* NetworkService.swift in Sources */,
+				9233C1332B174A4B007C227A /* DetailView.swift in Sources */,
 				920B184D2B0DEC22003A558A /* MainViewController.swift in Sources */,
 				92EF39932B0E05E7005C57E3 /* Details.swift in Sources */,
 				92EF39912B0E0552005C57E3 /* Advertisement.swift in Sources */,
 				92EF39962B0E06E8005C57E3 /* Dynamic.swift in Sources */,
 				92EF39992B0E19B3005C57E3 /* ProductCollectionView.swift in Sources */,
+				9233C12D2B171F27007C227A /* DetailViewModel.swift in Sources */,
 				92EF399C2B0E1BD9005C57E3 /* ProductCell.swift in Sources */,
 				920B18492B0DEC22003A558A /* AppDelegate.swift in Sources */,
 				920B184B2B0DEC22003A558A /* SceneDelegate.swift in Sources */,
@@ -318,7 +338,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -375,7 +395,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

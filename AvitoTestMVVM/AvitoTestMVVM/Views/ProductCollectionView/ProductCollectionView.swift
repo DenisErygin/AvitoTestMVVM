@@ -10,13 +10,13 @@ import Kingfisher
 
 final class ProductCollectionView: UICollectionView {
     
-    // MARK: - Private properties
-
+// MARK: - Properties
+    
     private let collectionLayout = UICollectionViewFlowLayout()
     
     private let viewModel = MainViewModel()
     
-    // MARK: - Initialization
+// MARK: - Initialization
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: collectionLayout)
@@ -33,7 +33,7 @@ final class ProductCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private func
+// MARK: - Func
     
     private func setupLayout() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -81,6 +81,24 @@ extension ProductCollectionView: UICollectionViewDataSource {
 
 extension ProductCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 170, height: 270)
+        CGSize(width: 170, height: 290)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension ProductCollectionView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let advertisment = viewModel.advertismentsData.value.advertisements[indexPath.item]
+        
+        let detailViewContoller = DetailViewController(detailId: advertisment.id)
+        
+        if let navigationController = self.window?.rootViewController as? UINavigationController {
+            navigationController.pushViewController(detailViewContoller, animated: true)
+        } else {
+            print("Ошибка: rootViewController не является UINavigationController")
+        }
     }
 }
