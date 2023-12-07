@@ -64,20 +64,7 @@ final class DetailViewController: UIViewController {
         let url = URL(string: detail.imageURL)
         detailView.imageView.kf.setImage(with: url)
         
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        
-        if let date = inputFormatter.date(from: detail.createdDate) {
-            let outputFormatter = DateFormatter()
-            outputFormatter.locale = Locale(identifier: "ru_RU")
-            outputFormatter.dateFormat = "d MMMM, yyyy"
-            
-            let formattedDate = outputFormatter.string(from: date)
-            detailView.dateLabel.text = formattedDate
-        } else {
-            print("Ошибка преобразования строки даты в объект Date. Неверный формат строки: \(detail.createdDate)")
-            detailView.dateLabel.text = "Неверный формат даты"
-        }
+        detailView.dateLabel.text = DateFormatterManager.createDateFrom(string: detail.createdDate)
     }
 }
 
