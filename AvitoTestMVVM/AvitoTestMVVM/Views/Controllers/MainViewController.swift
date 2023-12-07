@@ -16,12 +16,6 @@ final class MainViewController: UIViewController {
         
         setupUI()
         setConstrains()
-        
-        print("MainViewController download")
-    }
-    
-    deinit {
-        print("MainViewController deinit")
     }
 }
 

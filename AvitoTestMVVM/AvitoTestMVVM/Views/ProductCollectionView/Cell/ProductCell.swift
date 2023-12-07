@@ -73,21 +73,7 @@ final class ProductCell: UICollectionViewCell {
         titleLabel.text = item.title
         priceLabel.text = item.price
         locationLabel.text = item.location
-                
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        
-        if let date = inputFormatter.date(from: item.createdAt) {
-            let outputFormatter = DateFormatter()
-            outputFormatter.locale = Locale(identifier: "ru_RU")
-            outputFormatter.dateFormat = "d MMMM, yyyy"
-            
-            let formattedDate = outputFormatter.string(from: date)
-            dateLabel.text = formattedDate
-        } else {
-            print("Ошибка преобразования строки даты в объект Date. Неверный формат строки: \(item.createdAt)")
-            dateLabel.text = "Неверный формат даты"
-        }
+        dateLabel.text = DateFormatterManager.createDateFrom(string: item.createdAt)
     }
 }
 
